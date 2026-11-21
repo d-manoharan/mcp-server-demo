@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from typing import Annotated, Any
 
 from fastmcp import FastMCP
@@ -319,6 +320,8 @@ if load_settings().allow_writes:
 
 
 def main() -> None:
-    """Run the server over stdio (the default MCP transport)."""
+    """Run the MCP server over Streamable HTTP."""
 
-    mcp.run(show_banner=False)
+    host = os.getenv("HOST", os.getenv("FASTMCP_HOST", "0.0.0.0"))
+    port = int(os.getenv("PORT", os.getenv("FASTMCP_PORT", "8000")))
+    mcp.run(transport="http", host=host, port=port, show_banner=False)

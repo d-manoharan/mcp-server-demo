@@ -17,6 +17,8 @@ RUN python -m pip install --upgrade pip \
 RUN useradd --create-home --uid 10001 appuser
 USER appuser
 
-# This MCP server uses stdio transport; run it with `docker run -i`.
+EXPOSE 8000
+
+# This MCP server uses Streamable HTTP transport.
 ENTRYPOINT ["supabase-postgres-mcp"]
 CMD []

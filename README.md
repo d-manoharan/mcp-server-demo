@@ -1,8 +1,7 @@
 # supabase-postgres-mcp
 
-A [FastMCP](https://gofastmcp.com) server that lets MCP clients (Claude Desktop,
-VS Code, Cursor, OpenCode, ...) inspect and query a **Supabase Postgres**
-database.
+A [FastMCP](https://gofastmcp.com) server that lets MCP clients inspect and
+query a **Supabase Postgres** database over **Streamable HTTP**.
 
 - **One setting to configure:** a Postgres connection string (`DATABASE_URL`).
 - **Read-only by default.** `SELECT`, `WITH`, `SHOW`, and `EXPLAIN` run inside a
@@ -63,15 +62,14 @@ cp .env.example .env
 pytest -q                          # optional: smoke tests need no database
 ```
 
-Then point your MCP client at `.venv/bin/supabase-postgres-mcp` (see below), or
-run it manually:
+Run it manually:
 
 ```bash
 python -m supabase_postgres_mcp
 ```
 
-> The server speaks MCP over **stdio**, so it will appear to hang when run in a
-> terminal. That is expected — normally your MCP client launches it.
+The MCP endpoint will be available at `http://0.0.0.0:8000/mcp` by default.
+Set `HOST`/`PORT` (or `FASTMCP_HOST`/`FASTMCP_PORT`) to change the bind address.
 
 ### Using uv (optional)
 
