@@ -23,7 +23,7 @@ jobs:
           target: "~/apps/myapp"
           overwrite: true
 
-      - name: Deploy application
+      - name: Build Docker image on OCI VM
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.OCI_HOST }}
@@ -31,5 +31,5 @@ jobs:
           key: ${{ secrets.OCI_SSH_KEY }}
           script: |
             cd ~/apps/myapp
-            docker compose up -d --build
+            docker build -t supabase-postgres-mcp:latest .
             docker image prune -f
